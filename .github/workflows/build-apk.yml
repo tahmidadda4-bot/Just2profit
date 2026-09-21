@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 on:
@@ -24,15 +23,15 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
-      with:
-        gradle-version: '8.5'
 
-    - name: Build Debug APK
-      run: gradle assembleDebug
+    - name: Make Gradlew Executable & Build
+      run: |
+        chmod +x gradlew || true
+        ./gradlew assembleDebug || gradle assembleDebug
       working-directory: ./android
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: Just2Profit-Debug-APK
-        path: android/app/build/outputs/apk/debug/*.apk
+        path: android/app/build/outputs/apk/debug/*.apkloa    uses: acti       name: J
