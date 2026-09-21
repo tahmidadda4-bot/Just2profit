@@ -3,8 +3,6 @@ name: Build Android APK
 on:
   push:
     branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
@@ -21,17 +19,18 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
-
-    - name: Make Gradlew Executable & Build
+    - name: Build Debug APK
       run: |
-        chmod +x gradlew || true
-        ./gradlew assembleDebug || gradle assembleDebug
-      working-directory: ./android
+        cd android
+        if [ -f "gradlew" ]; then
+          chmod +x gradlew
+          ./gradlew assembleDebug
+        else
+          gradle assembleDebug
+        fi
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: Just2Profit-Debug-APK
-        path: android/app/build/outputs/apk/debug/*.apkloa    uses: acti       name: J
+        path: android/app/build/outputs/apk/debug/*.apk
