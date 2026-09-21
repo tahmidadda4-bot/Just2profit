@@ -1,14 +1,32 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id 'com.android.application'
 }
-android { namespace="com.just2profit.app"; compileSdk=35
-    defaultConfig { applicationId="com.just2profit.app"; minSdk=24; targetSdk=35; versionCode=1; versionName="1.0" }
+
+android {
+    namespace 'com.just2profit.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.just2profit.app"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
+
 dependencies {
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.activity:activity-compose:1.10.1")
-    implementation("androidx.compose.ui:ui:1.7.6")
-    implementation("androidx.compose.material3:material3:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.7.6")
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
